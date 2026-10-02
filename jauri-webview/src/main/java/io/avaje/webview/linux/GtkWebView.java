@@ -335,6 +335,34 @@ public final class GtkWebView extends WebviewBase {
   }
 
   @Override
+  public Webview unminimizeWindow() {
+    dispatchImpl(() -> LinuxHelper.unminimizeWindow(this));
+    return this;
+  }
+
+  @Override
+  public boolean isMinimized() {
+    return LinuxHelper.isMinimized(this);
+  }
+
+  @Override
+  public Webview showWindow() {
+    dispatchImpl(() -> LinuxHelper.showWindow(this));
+    return this;
+  }
+
+  @Override
+  public Webview hideWindow() {
+    dispatchImpl(() -> LinuxHelper.hideWindow(this));
+    return this;
+  }
+
+  @Override
+  public boolean isHidden() {
+    return LinuxHelper.isHidden(this);
+  }
+
+  @Override
   protected void startWindowDragImpl() {
     LinuxHelper.startWindowDrag(this);
   }

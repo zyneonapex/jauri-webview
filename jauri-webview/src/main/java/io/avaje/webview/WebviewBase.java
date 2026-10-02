@@ -273,6 +273,22 @@ public abstract sealed class WebviewBase implements Webview
   public abstract Webview minimizeWindow();
 
   @Override
+  public abstract Webview unminimizeWindow();
+
+  @Override
+  public abstract boolean isMinimized();
+
+  @Override
+  public abstract Webview showWindow();
+
+  @Override
+  public abstract Webview hideWindow();
+
+  @Override
+  public abstract boolean isHidden();
+
+
+  @Override
   public void startWindowDrag() {
     dispatchImpl(this::startWindowDragImpl);
   }

@@ -220,6 +220,41 @@ public interface Webview extends Closeable, Runnable {
   Webview minimizeWindow();
 
   /**
+   * Restores a minimized webview window back to its prior size and position.
+   *
+   * @return this Webview instance for chaining
+   */
+  Webview unminimizeWindow();
+
+  /**
+   * Reports whether the webview window is currently minimized.
+   *
+   * @return {@code true} if the window is minimized
+   */
+  boolean isMinimized();
+
+  /**
+   * Restores a hidden webview window back to its prior size and position.
+   *
+   * @return this Webview instance for chaining
+   */
+  Webview showWindow();
+
+  /**
+   * Hides the webview window.
+   *
+   * @return this Webview instance for chaining
+   */
+  Webview hideWindow();
+
+  /**
+   * Reports whether the webview window is currently hidden.
+   *
+   * @return {@code true} if the window is hidden
+   */
+  boolean isHidden();
+
+  /**
    * Begins a native window-move operation, as if the user had grabbed the title bar and started
    * dragging.
    *

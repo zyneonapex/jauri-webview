@@ -21,6 +21,16 @@ final class LinuxHelper {
     Gtk4.gtkWindowMinimize(webview.nativeWindowPointer());
   }
 
+  /** Asks the window manager to restore the window from a minimized (iconified) state. */
+  static void unminimizeWindow(Webview webview) {
+    Gtk4.gtkWindowUnminimize(webview.nativeWindowPointer());
+  }
+
+  /** Returns {@code true} if the window is currently minimized. */
+  static boolean isMinimized(Webview webview) {
+    return Gtk4.gtkWindowIsMinimized(webview.nativeWindowPointer());
+  }
+
   /** Requests the window manager to maximize the window. */
   static void maximizeWindow(Webview webview) {
     Gtk4.gtkWindowMaximize(webview.nativeWindowPointer());
@@ -35,6 +45,23 @@ final class LinuxHelper {
   static boolean isMaximized(Webview webview) {
     return Gtk4.gtkWindowIsMaximized(webview.nativeWindowPointer());
   }
+
+  /** Requests the window manager to maximize the window. */
+  static void hideWindow(Webview webview) {
+    Gtk4.gtkWindowHide(webview.nativeWindowPointer());
+  }
+
+  /** Requests the window manager to restore the window from a maximized state. */
+  static void showWindow(Webview webview) {
+    Gtk4.gtkWindowShow(webview.nativeWindowPointer());
+  }
+
+  /** Returns {@code true} if the window is currently maximized. */
+  static boolean isHidden(Webview webview) {
+    return Gtk4.gtkWindowIsHidden(webview.nativeWindowPointer());
+  }
+
+
 
   /** Begins a native window-move grab, as if the user had grabbed the title bar. */
   static void startWindowDrag(Webview webview) {

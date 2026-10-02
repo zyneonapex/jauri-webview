@@ -5,14 +5,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>io.avaje.webview</groupId>
-		<artifactId>avaje-webview-parent</artifactId>
-		<version>0.29</version>
+		<groupId>com.zyneonstudios.apex</groupId>
+		<artifactId>jauri-webview-parent</artifactId>
+		<version>0.30</version>
 	</parent>
 
-	<artifactId>avaje-webview</artifactId>
+	<artifactId>jauri-webview</artifactId>
 
-	<name>avaje-webview</name>
+	<name>jauri-webview</name>
 	<description>FFM Wrapper over webview</description>
 
 	<dependencies>

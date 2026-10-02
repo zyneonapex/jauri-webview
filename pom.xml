@@ -9,35 +9,34 @@
     <version>5.2</version>
   </parent>
 
-  <groupId>io.avaje.webview</groupId>
-  <artifactId>avaje-webview-parent</artifactId>
-  <name>avaje-webview-parent</name>
-  <version>0.29</version>
+  <groupId>com.zyneonstudios.apex</groupId>
+  <artifactId>jauri-webview-parent</artifactId>
+  <name>jauri-webview-parent</name>
+  <version>0.30</version>
   <packaging>pom</packaging>
-  <scm>
-    <developerConnection>scm:git:git@github.com:avaje/avaje-webview.git</developerConnection>
-  </scm>
 
   <properties>
     <maven.compiler.release>25</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <modules>
-    <module>avaje-webview</module>
+    <module>jauri-webview</module>
   </modules>
 
+  <distributionManagement>
+    <repository>
+      <id>nerofy-snapshots</id>
+      <name>Nerofy Network Maven repository</name>
+      <url>https://maven.nrfy.net/snapshots</url>
+    </repository>
+  </distributionManagement>
+
   <profiles>
-    <profile>
-      <id>central</id>
-    </profile>
     <profile>
       <id>default</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <modules>
-        <module>examples</module>
-      </modules>
     </profile>
   </profiles>
 </project>

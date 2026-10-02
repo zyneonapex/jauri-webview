@@ -136,6 +136,22 @@ final class Gtk4 {
       downcall("gtk_window_minimize", FunctionDescriptor.ofVoid(ADDRESS));
 
   /**
+   * {@code gtk_window_unminimize(GtkWindow* window) -> void}
+   *
+   * <p>Asks the window manager to restore the window from the taskbar.
+   */
+  private static final MethodHandle GTK_WINDOW_UNMINIMIZE =
+    downcall("gtk_window_unminimize", FunctionDescriptor.ofVoid(ADDRESS));
+
+  /**
+   * {@code gtk_window_is_minimized(GtkWindow* window) -> gboolean}
+   *
+   * <p>Reports whether the window is currently minimized.
+   */
+  private static final MethodHandle GTK_WINDOW_IS_MINIMIZED =
+    downcall("gtk_window_is_minimized", FunctionDescriptor.of(JAVA_INT, ADDRESS));
+
+  /**
    * {@code gtk_window_maximize(GtkWindow* window) -> void}
    *
    * <p>Asks the window manager to maximize the window.
@@ -158,6 +174,24 @@ final class Gtk4 {
    */
   private static final MethodHandle GTK_WINDOW_IS_MAXIMIZED =
       downcall("gtk_window_is_maximized", FunctionDescriptor.of(JAVA_INT, ADDRESS));
+
+  /**
+   * {@code gtk_widget_hide(GtkWidget* widget) -> void}
+   */
+  private static final MethodHandle GTK_WIDGET_HIDE =
+    downcall("gtk_widget_hide", FunctionDescriptor.ofVoid(ADDRESS));
+
+  /**
+   * {@code gtk_widget_show(GtkWidget* widget) -> void}
+   */
+  private static final MethodHandle GTK_WIDGET_SHOW =
+    downcall("gtk_widget_show", FunctionDescriptor.ofVoid(ADDRESS));
+
+  /**
+   * {@code gtk_widget_get_visible(GtkWidget* widget) -> gboolean}
+   */
+  private static final MethodHandle GTK_WIDGET_GET_VISIBLE =
+    downcall("gtk_widget_get_visible", FunctionDescriptor.of(JAVA_INT, ADDRESS));
 
   /**
    * {@code gtk_window_fullscreen(GtkWindow* window) -> void}
@@ -509,6 +543,32 @@ final class Gtk4 {
   }
 
   /**
+   * Asks the window manager to minimize (iconify) the window to the taskbar.
+   *
+   * @param window a {@code GtkWindow*}
+   */
+  static void gtkWindowUnminimize(MemorySegment window) {
+    try {
+      GTK_WINDOW_UNMINIMIZE.invokeExact(window);
+    } catch (final Throwable t) {
+      throw new RuntimeException(t);
+    }
+  }
+
+  /**
+   * Returns {@code true} if the window is currently minimized.
+   *
+   * @param window a {@code GtkWindow*}
+   */
+  static boolean gtkWindowIsMinimized(MemorySegment window) {
+    try {
+      return (int) GTK_WINDOW_IS_MINIMIZED.invokeExact(window) != 0;
+    } catch (final Throwable t) {
+      throw new RuntimeException(t);
+    }
+  }
+
+  /**
    * Asks the window manager to maximize the window.
    *
    * @param window a {@code GtkWindow*}
@@ -542,6 +602,30 @@ final class Gtk4 {
   static boolean gtkWindowIsMaximized(MemorySegment window) {
     try {
       return (int) GTK_WINDOW_IS_MAXIMIZED.invokeExact(window) != 0;
+    } catch (final Throwable t) {
+      throw new RuntimeException(t);
+    }
+  }
+
+  static void gtkWindowHide(MemorySegment window) {
+    try {
+      GTK_WIDGET_HIDE.invokeExact(window);
+    } catch (final Throwable t) {
+      throw new RuntimeException(t);
+    }
+  }
+
+  static void gtkWindowShow(MemorySegment window) {
+    try {
+      GTK_WIDGET_SHOW.invokeExact(window);
+    } catch (final Throwable t) {
+      throw new RuntimeException(t);
+    }
+  }
+
+  static boolean gtkWindowIsHidden(MemorySegment window) {
+    try {
+      return (int) GTK_WIDGET_GET_VISIBLE.invokeExact(window) == 0;
     } catch (final Throwable t) {
       throw new RuntimeException(t);
     }

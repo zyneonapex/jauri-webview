@@ -83,6 +83,38 @@ final class MacOSHelper {
     }
   }
 
+  static void unminimize(MemorySegment nsWindow) {
+    if (isMinimized(nsWindow)) {
+      try (var a = Arena.ofConfined()) {
+        sendVoid1(nsWindow, sel(a, "deminiaturize:"), MemorySegment.NULL);
+      }
+    }
+  }
+
+  static boolean isMinimized(MemorySegment nsWindow) {
+    try (var a = Arena.ofConfined()) {
+      return ((MemorySegment) send0(nsWindow, sel(a, "isMiniaturized"))).address() != 0;
+    }
+  }
+
+  static void hide(MemorySegment nsWindow) {
+    try (var a = Arena.ofConfined()) {
+      sendVoid1(nsWindow, sel(a, "orderOut:"), MemorySegment.NULL);
+    }
+  }
+
+  static void show(MemorySegment nsWindow) {
+    try (var a = Arena.ofConfined()) {
+      sendVoid1(nsWindow, sel(a, "makeKeyAndOrderFront:"), MemorySegment.NULL);
+    }
+  }
+
+  static boolean isHidden(MemorySegment nsWindow) {
+    try (var a = Arena.ofConfined()) {
+      return ((MemorySegment) send0(nsWindow, sel(a, "isVisible"))).address() == 0;
+    }
+  }
+
   /**
    * Begins a native window-move operation for {@code nsWindow}, as if the user had grabbed the
    * title bar, using the current NSEvent ({@code [NSApp currentEvent]}) as the originating mouse

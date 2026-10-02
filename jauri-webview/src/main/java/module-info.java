@@ -24,6 +24,7 @@
 module io.avaje.webview {
 
   requires transitive org.jspecify;
+  requires java.desktop;
 
   exports io.avaje.webview;
 

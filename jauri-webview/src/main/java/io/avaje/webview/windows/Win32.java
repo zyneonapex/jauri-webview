@@ -240,6 +240,12 @@ final class Win32 {
       downcall(USER32, "ShowWindow", FunctionDescriptor.of(JAVA_INT, ADDRESS, JAVA_INT));
 
   /**
+   * {@code IsWindowVisible(hWnd) -> BOOL}
+   */
+  static final MethodHandle IsWindowVisible =
+    downcall(USER32, "IsWindowVisible", FunctionDescriptor.of(JAVA_INT, ADDRESS));
+
+  /**
    * {@code UpdateWindow(hWnd) -> BOOL}. Forces an immediate repaint by sending {@code WM_PAINT}
    * directly.
    */
@@ -333,6 +339,14 @@ final class Win32 {
    */
   static final MethodHandle IsZoomed =
       downcall(USER32, "IsZoomed", FunctionDescriptor.of(JAVA_INT, ADDRESS));
+
+  /**
+   * {@code IsIconic(hWnd) -> BOOL}
+   *
+   * <p>Reports whether a window is currently minimized.
+   */
+  static final MethodHandle IsIconic =
+    downcall(USER32, "IsIconic", FunctionDescriptor.of(JAVA_INT, ADDRESS));
 
   /**
    * {@code SetWindowLongW(hWnd, nIndex, dwNewLong) -> LONG}
@@ -557,6 +571,24 @@ final class Win32 {
   static boolean isZoomed(MemorySegment hwnd) {
     try {
       return (int) IsZoomed.invokeExact(hwnd) != 0;
+    } catch (final Throwable t) {
+      throw new RuntimeException(t);
+    }
+  }
+
+  /** Returns {@code true} if {@code hwnd} is currently minimized. */
+  static boolean isIconic(MemorySegment hwnd) {
+    try {
+      return (int) IsIconic.invokeExact(hwnd) != 0;
+    } catch (final Throwable t) {
+      throw new RuntimeException(t);
+    }
+  }
+
+  /** Returns {@code true} if {@code hwnd} is currently hidden. */
+  static boolean isHidden(MemorySegment hwnd) {
+    try {
+      return (int) IsWindowVisible.invokeExact(hwnd) == 0;
     } catch (final Throwable t) {
       throw new RuntimeException(t);
     }

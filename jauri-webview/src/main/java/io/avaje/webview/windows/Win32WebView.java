@@ -426,6 +426,34 @@ public final class Win32WebView extends WebviewBase {
   }
 
   @Override
+  public Webview unminimizeWindow() {
+    dispatchImpl(() -> Win32.showWindow(hwnd, Win32.SW_RESTORE));
+    return this;
+  }
+
+  @Override
+  public boolean isMinimized() {
+    return Win32.isIconic(hwnd);
+  }
+
+  @Override
+  public Webview hideWindow() {
+    dispatchImpl(() -> Win32.showWindow(hwnd, Win32.SW_HIDE));
+    return this;
+  }
+
+  @Override
+  public Webview showWindow() {
+    dispatchImpl(() -> Win32.showWindow(hwnd, Win32.SW_SHOW));
+    return this;
+  }
+
+  @Override
+  public boolean isHidden() {
+    return Win32.isHidden(hwnd);
+  }
+
+  @Override
   protected void startWindowDragImpl() {
     Win32.startWindowDrag(hwnd);
   }
