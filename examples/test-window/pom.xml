@@ -9,7 +9,7 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>todo-basecoat-vue</artifactId>
+    <artifactId>test-window</artifactId>
 
     <properties>
         <maven.compiler.release>25</maven.compiler.release>
@@ -21,6 +21,12 @@
             <groupId>com.zyneonstudios.apex</groupId>
             <artifactId>jauri-webview</artifactId>
             <version>0.30</version>
+        </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.7.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

@@ -143,13 +143,7 @@ final class Gtk4 {
   private static final MethodHandle GTK_WINDOW_UNMINIMIZE =
     downcall("gtk_window_unminimize", FunctionDescriptor.ofVoid(ADDRESS));
 
-  /**
-   * {@code gtk_window_is_minimized(GtkWindow* window) -> gboolean}
-   *
-   * <p>Reports whether the window is currently minimized.
-   */
-  private static final MethodHandle GTK_WINDOW_IS_MINIMIZED =
-    downcall("gtk_window_is_minimized", FunctionDescriptor.of(JAVA_INT, ADDRESS));
+  private static final int GDK_TOPLEVEL_STATE_MINIMIZED = 1 << 4;
 
   /**
    * {@code gtk_window_maximize(GtkWindow* window) -> void}
@@ -236,6 +230,12 @@ final class Gtk4 {
    */
   private static final MethodHandle GTK_NATIVE_GET_SURFACE =
       downcall("gtk_native_get_surface", FunctionDescriptor.of(ADDRESS, ADDRESS));
+
+  /**
+   * {@code gdk_toplevel_get_state(GdkToplevel* self) -> GdkToplevelState}
+   */
+  private static final MethodHandle GDK_TOPLEVEL_GET_STATE =
+    downcall("gdk_toplevel_get_state", FunctionDescriptor.of(JAVA_INT, ADDRESS));
 
   /** {@code gtk_widget_get_display(GtkWidget* widget) -> GdkDisplay*} */
   private static final MethodHandle GTK_WIDGET_GET_DISPLAY =
@@ -562,9 +562,14 @@ final class Gtk4 {
    */
   static boolean gtkWindowIsMinimized(MemorySegment window) {
     try {
-      return (int) GTK_WINDOW_IS_MINIMIZED.invokeExact(window) != 0;
+      MemorySegment surface = (MemorySegment) GTK_NATIVE_GET_SURFACE.invokeExact(window);
+      if (surface.address() == 0) {
+        return false;
+      }
+      int state = (int) GDK_TOPLEVEL_GET_STATE.invokeExact(surface);
+      return (state & GDK_TOPLEVEL_STATE_MINIMIZED) != 0;
     } catch (final Throwable t) {
-      throw new RuntimeException(t);
+      return false;
     }
   }
 

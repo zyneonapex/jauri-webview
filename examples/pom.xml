@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.avaje.webview</groupId>
-        <artifactId>avaje-webview-parent</artifactId>
+        <groupId>com.zyneonstudios.apex</groupId>
+        <artifactId>jauri-webview-parent</artifactId>
         <version>0.30</version>
     </parent>
     <version>0.1</version>
@@ -16,8 +16,8 @@
 
     <modules>
         <module>hello-world</module>
-        <module>hello-world-jex</module>
         <module>htmx-jex-bootstrap</module>
+        <module>test-window</module>
         <module>todo-basecoat-vue</module>
     </modules>
 

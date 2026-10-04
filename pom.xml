@@ -21,6 +21,7 @@
   </properties>
   <modules>
     <module>jauri-webview</module>
+    <module>examples</module>
   </modules>
 
   <distributionManagement>

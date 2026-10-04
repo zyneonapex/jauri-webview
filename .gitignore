@@ -11,3 +11,5 @@ examples/hello-world-jex/webview.dll
 examples/hello-world/webview.dll
 examples/hello-world-jex/libwebview.so
 .claude/settings.local.json
+
+jauri-webview/src/main/java/io/avaje/webview/Main.java
