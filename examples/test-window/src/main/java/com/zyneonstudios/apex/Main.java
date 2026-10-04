@@ -26,7 +26,7 @@ public class Main {
     Thread.ofPlatform().start(() -> {
       try {
         webview = Webview.builder()
-          .title("My Webview")
+          .title("Test webview")
           .width(800)
           .height(600)
           .minSize(400, 300)
