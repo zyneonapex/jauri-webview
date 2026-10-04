@@ -1,17 +1,13 @@
 ![Supported JVM Versions](https://img.shields.io/badge/JVM-25+-brightgreen.svg?&logo=openjdk)
-[![Discord](https://img.shields.io/discord/1074074312421683250?color=%237289da&label=discord)](https://discord.gg/Qcqf9R27BR)
-[![Build](https://github.com/avaje/avaje-webview/actions/workflows/build.yml/badge.svg)](https://github.com/avaje/avaje-webview/actions/workflows/build.yml)
-[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/avaje/avaje-webview/blob/master/LICENSE)
-[![Maven Central](https://img.shields.io/maven-central/v/io.avaje.webview/avaje-webview.svg?label=Maven%20Central)](https://mvnrepository.com/artifact/io.avaje.webview/avaje-webview)
-[![javadoc](https://javadoc.io/badge2/io.avaje.webview/avaje-webview/javadoc.svg?color=purple)](https://javadoc.io/doc/io.avaje.webview/avaje-webview)
+[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/zyneonapex/jauri-webview/blob/main/LICENSE)
 
-## avaje-webview
+## jauri-webview
 
-Avaje Webview wraps native platform webview engines to provide a clean interface for building modern cross-platform GUIs.
+Jauri Webview wraps native platform webview engines to provide a clean interface for building modern cross-platform GUIs.
 
 Uses **Java 25 FFM** (Foreign Function & Memory) to call native libraries directly.
 
-This is an enhanced fork of https://github.com/webview/webview_java with some [major differences](#notable-changes-from-upstream)
+This is an extended fork of [avaje-webview](https://github.com/avaje/avaje-webview) which is an enhanced fork of [webview_java](https://github.com/webview/webview_java) with some [major differences](#notable-changes-from-upstream)
 
 ## Platform requirements
 
@@ -23,6 +19,10 @@ This is an enhanced fork of https://github.com/webview/webview_java with some [m
 
 Linux install example (Debian/Ubuntu):
 ```sh
+sudo pacman -S gtk4 webkit2gtk-4.1 webkitgtk-6.0 --needed
+```
+
+```sh
 sudo apt-get install libgtk-4-1 libwebkitgtk-6.0-4 libjavascriptcoregtk-6.0-1
 ```
 
@@ -31,9 +31,15 @@ sudo apt-get install libgtk-4-1 libwebkitgtk-6.0-4 libjavascriptcoregtk-6.0-1
 #### Add dependency
 
 ```xml
+<repository>
+    <id>nerofy-snapshots</id>
+    <name>Nerofy Network Maven repository</name>
+    <url>https://maven.nrfy.net/snapshots</url>
+</repository>
+
 <dependency>
-    <groupId>io.avaje.webview</groupId>
-    <artifactId>avaje-webview</artifactId>
+    <groupId>com.zyneonstudios.apex</groupId>
+    <artifactId>jauri-webview</artifactId>
     <version>${version}</version>
 </dependency>
 ```
@@ -294,7 +300,7 @@ With `redirectConsole(true)`, `console.log`, `console.warn`, `console.error`, et
 to `java.lang.System.Logger` under the name `io.avaje.webview`. Configure your logging
 framework to see webview JS console output.
 
-## Notable changes from upstream
+## Notable changes in avaje-webview from webview_java
 
 - Use **FFM** instead of JNA, no embedded native libraries
 - Full **JPMS** support
