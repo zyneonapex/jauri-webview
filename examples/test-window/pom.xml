@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.avaje</groupId>
         <artifactId>examples</artifactId>
-        <version>0.1</version>
+        <version>0.31</version>
     </parent>
 
     <artifactId>test-window</artifactId>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.zyneonstudios.apex</groupId>
             <artifactId>jauri-webview</artifactId>
-            <version>0.30</version>
+            <version>0.31</version>
         </dependency>
         <dependency>
             <groupId>com.formdev</groupId>
@@ -29,5 +29,36 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.6.2</version>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+              <configuration>
+                <transformers>
+                  <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <mainClass>com.zyneonstudios.apex.Main</mainClass>
+                  </transformer>
+                </transformers>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </build>
 
 </project>

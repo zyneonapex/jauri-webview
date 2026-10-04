@@ -143,8 +143,6 @@ final class Gtk4 {
   private static final MethodHandle GTK_WINDOW_UNMINIMIZE =
     downcall("gtk_window_unminimize", FunctionDescriptor.ofVoid(ADDRESS));
 
-  private static final int GDK_TOPLEVEL_STATE_MINIMIZED = 1 << 4;
-
   /**
    * {@code gtk_window_maximize(GtkWindow* window) -> void}
    *
@@ -231,12 +229,6 @@ final class Gtk4 {
   private static final MethodHandle GTK_NATIVE_GET_SURFACE =
       downcall("gtk_native_get_surface", FunctionDescriptor.of(ADDRESS, ADDRESS));
 
-  /**
-   * {@code gdk_toplevel_get_state(GdkToplevel* self) -> GdkToplevelState}
-   */
-  private static final MethodHandle GDK_TOPLEVEL_GET_STATE =
-    downcall("gdk_toplevel_get_state", FunctionDescriptor.of(JAVA_INT, ADDRESS));
-
   /** {@code gtk_widget_get_display(GtkWidget* widget) -> GdkDisplay*} */
   private static final MethodHandle GTK_WIDGET_GET_DISPLAY =
       downcall("gtk_widget_get_display", FunctionDescriptor.of(ADDRESS, ADDRESS));
@@ -257,6 +249,14 @@ final class Gtk4 {
       downcall(
           "gdk_surface_get_device_position",
           FunctionDescriptor.of(JAVA_INT, ADDRESS, ADDRESS, ADDRESS, ADDRESS, ADDRESS));
+
+  /**
+   * {@code gtk_window_present(GtkWindow* window) -> void}
+   *
+   * <p>Presents a window to the user, unminimizing, raising, and focusing it.
+   */
+  private static final MethodHandle GTK_WINDOW_PRESENT =
+    downcall("gtk_window_present", FunctionDescriptor.ofVoid(ADDRESS));
 
   /**
    * {@code gdk_toplevel_begin_move(GdkToplevel*, GdkDevice*, int button, double x, double y,
@@ -550,10 +550,17 @@ final class Gtk4 {
   static void gtkWindowUnminimize(MemorySegment window) {
     try {
       GTK_WINDOW_UNMINIMIZE.invokeExact(window);
+      GTK_WINDOW_PRESENT.invokeExact(window);
     } catch (final Throwable t) {
       throw new RuntimeException(t);
     }
   }
+
+  /**
+   * {@code gdk_toplevel_get_state(GdkToplevel* toplevel) -> GdkToplevelState}
+   */
+  private static final MethodHandle GDK_TOPLEVEL_GET_STATE =
+    downcall("gdk_toplevel_get_state", FunctionDescriptor.of(JAVA_INT, ADDRESS));
 
   /**
    * Returns {@code true} if the window is currently minimized.
@@ -562,14 +569,22 @@ final class Gtk4 {
    */
   static boolean gtkWindowIsMinimized(MemorySegment window) {
     try {
-      MemorySegment surface = (MemorySegment) GTK_NATIVE_GET_SURFACE.invokeExact(window);
-      if (surface.address() == 0) {
+      // Hole die GdkSurface (GdkToplevel) des Fensters über das bereits vorhandene Handle
+      final var surface = (MemorySegment) GTK_NATIVE_GET_SURFACE.invokeExact(window);
+
+      // Falls das Fenster noch nicht an den Window-Manager übergeben (realized) wurde,
+      // ist der Pointer NULL (0L).
+      if (surface.address() == 0L) {
         return false;
       }
-      int state = (int) GDK_TOPLEVEL_GET_STATE.invokeExact(surface);
-      return (state & GDK_TOPLEVEL_STATE_MINIMIZED) != 0;
+
+      // Lese die Status-Bitmaske der Surface aus
+      final int state = (int) GDK_TOPLEVEL_GET_STATE.invokeExact(surface);
+
+      // GDK_TOPLEVEL_STATE_MINIMIZED ist das erste Bit (1 << 0)
+      return (state & 1) != 0;
     } catch (final Throwable t) {
-      return false;
+      throw new RuntimeException(t);
     }
   }
 

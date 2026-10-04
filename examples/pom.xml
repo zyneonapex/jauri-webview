@@ -6,9 +6,8 @@
     <parent>
         <groupId>com.zyneonstudios.apex</groupId>
         <artifactId>jauri-webview-parent</artifactId>
-        <version>0.30</version>
+        <version>0.31</version>
     </parent>
-    <version>0.1</version>
 
     <groupId>io.avaje</groupId>
     <artifactId>examples</artifactId>

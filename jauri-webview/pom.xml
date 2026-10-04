@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.zyneonstudios.apex</groupId>
 		<artifactId>jauri-webview-parent</artifactId>
-		<version>0.30</version>
+		<version>0.31</version>
 	</parent>
 
 	<artifactId>jauri-webview</artifactId>

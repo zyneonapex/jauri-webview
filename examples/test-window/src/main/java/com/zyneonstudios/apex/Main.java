@@ -17,8 +17,8 @@ public class Main {
     FlatDarkLaf.setup();
 
     JFrame frame = new JFrame();
-    frame.setSize(500, 200);
-    frame.setResizable(false);
+    frame.setSize(600, 400);
+    frame.setResizable(true);
     frame.setAlwaysOnTop(true);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setLayout(new FlowLayout());
@@ -32,7 +32,6 @@ public class Main {
           .minSize(400, 300)
           .enableDeveloperTools(true)
           .navigate("https://google.com")
-          .borderless(true, true)
           .build();
 
         webview.bind("startDrag", (_) -> {
@@ -93,20 +92,6 @@ public class Main {
     });
 
     controlPanel.add(urlInput, BorderLayout.CENTER);
-    JPanel buttonControls = new JPanel(new FlowLayout());
-    controlPanel.add(buttonControls, BorderLayout.EAST);
-
-    JButton minimize_ = new JButton("-");
-    minimize_.addActionListener(_ -> toggleMinimize());
-    buttonControls.add(minimize_);
-
-    JButton maximize_ = new JButton("▢");
-    maximize_.addActionListener(_ -> toggleMaximize());
-    buttonControls.add(maximize_);
-
-    JButton close = new JButton("X");
-    close.addActionListener(_ -> close());
-    buttonControls.add(close);
 
     JPanel maximizePanel = new JPanel();
     maximizePanel.setLayout(new FlowLayout());
