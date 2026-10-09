@@ -77,6 +77,13 @@ final class Win32 {
   static final int SM_CXSCREEN = 0;
   static final int SM_CYSCREEN = 1;
   static final int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
+
+  // Mica / System Backdrop Constants
+  static final int DWMWA_SYSTEMBACKDROP_TYPE = 38;
+  static final int DWMSBT_MAINWINDOW = 2;
+  static final int DWMSBT_TABBEDWINDOW = 4;
+  static final int DWMWA_MICA_EFFECT = 1029;
+
   static final int DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_WIN11 = 19;
   static final int IMAGE_ICON = 1;
   static final int LR_LOADFROMFILE = 0x0010;
@@ -764,6 +771,33 @@ final class Win32 {
                     (int) JAVA_INT.byteSize());
       }
       final var _ = (int) InvalidateRect.invokeExact(hwnd, MemorySegment.NULL, 0);
+    } catch (final Throwable t) {
+      throw new RuntimeException(t);
+    }
+  }
+
+  /**
+   * Applies the Mica system backdrop DWM attribute on {@code hwnd}. Tries the modern backdrop type
+   * attribute (Windows 11 22H2+) first; if that returns a non-zero HRESULT, falls back to the legacy
+   * Mica effect attribute (Windows 11 21H2).
+   */
+  static void applyMica(MemorySegment hwnd) {
+    try (var a = Arena.ofConfined()) {
+      final var val = a.allocate(JAVA_INT);
+
+      val.set(JAVA_INT, 0, DWMSBT_MAINWINDOW);
+      var hr =
+        (int)
+          DwmSetWindowAttr.invokeExact(
+            hwnd, DWMWA_SYSTEMBACKDROP_TYPE, val, (int) JAVA_INT.byteSize());
+
+      if (hr != 0) {
+        val.set(JAVA_INT, 0, 1);
+        final var _ =
+          (int)
+            DwmSetWindowAttr.invokeExact(
+              hwnd, DWMWA_MICA_EFFECT, val, (int) JAVA_INT.byteSize());
+      }
     } catch (final Throwable t) {
       throw new RuntimeException(t);
     }

@@ -200,6 +200,11 @@ public final class Win32WebView extends WebviewBase {
         throw new RuntimeException(t);
       }
     }
+    try {
+      Win32.applyMica(hwnd);
+    } catch (Exception e) {
+      System.err.println("Failed to apply Mica effect (is it unsupported on current OS?): " + e.getMessage());
+    }
   }
 
   @Override

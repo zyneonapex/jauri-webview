@@ -1,7 +1,7 @@
 ![Supported JVM Versions](https://img.shields.io/badge/JVM-25+-brightgreen.svg?&logo=openjdk)
 [![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/zyneonapex/jauri-webview/blob/main/LICENSE)
-[![Repository version](https://img.shields.io/badge/Nerofy_Snapshots-0.34-purple)](https://maven.nrfy.net/#/snapshots/com/zyneonstudios/apex/jauri-webview/0.34)
-[![Version](https://img.shields.io/badge/Version-0.34-pink)](https://github.com/zyneonapex/jauri-webview/releases)
+[![Repository version](https://img.shields.io/badge/Nerofy_Snapshots-0.35-purple)](https://maven.nrfy.net/#/snapshots/com/zyneonstudios/apex/jauri-webview/0.35)
+[![Version](https://img.shields.io/badge/Version-0.35-pink)](https://github.com/zyneonapex/jauri-webview/releases)
 
 ## jauri-webview
 
@@ -42,7 +42,7 @@ sudo apt-get install libgtk-4-1 libwebkitgtk-6.0-4 libjavascriptcoregtk-6.0-1
 <dependency>
     <groupId>com.zyneonstudios.apex</groupId>
     <artifactId>jauri-webview</artifactId>
-    <version>0.34</version>
+    <version>0.35</version>
 </dependency>
 ```
 #### JVM flags

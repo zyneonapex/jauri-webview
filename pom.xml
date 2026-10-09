@@ -12,7 +12,7 @@
   <groupId>com.zyneonstudios.apex</groupId>
   <artifactId>jauri-webview-parent</artifactId>
   <name>jauri-webview-parent</name>
-  <version>0.34</version>
+  <version>0.35</version>
   <packaging>pom</packaging>
 
   <properties>
