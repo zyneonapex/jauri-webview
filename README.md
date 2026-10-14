@@ -19,7 +19,7 @@ This is an extended fork of [avaje-webview](https://github.com/avaje/avaje-webvi
 | **macOS** | WKWebView | Built into macOS |
 | **Windows** | WebView2 (Edge) | Microsoft Edge must be installed (pre-installed on Windows 10+) |
 
-Linux install example (Debian/Ubuntu):
+Linux install example for Arch and Debian-based distros:
 ```sh
 sudo pacman -S gtk4 webkit2gtk-4.1 webkitgtk-6.0 --needed
 ```
