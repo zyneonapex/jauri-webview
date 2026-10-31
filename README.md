@@ -1,6 +1,6 @@
 ![Supported JVM Versions](https://img.shields.io/badge/JVM-25+-brightgreen.svg?&logo=openjdk)
 [![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/zyneonapex/jauri-webview/blob/main/LICENSE)
-[![Repository version](https://img.shields.io/badge/Nerofy_Snapshots-0.30-purple)](https://maven.nrfy.net/#/snapshots/com/zyneonstudios/apex/jauri-webview/0.30)
+[![Repository version](https://img.shields.io/badge/Nerofy_Snapshots-0.30-purple)](https://maven.zyneonstudios.com/#/snapshots/com/zyneonstudios/apex/jauri-webview/0.30)
 [![Version](https://img.shields.io/badge/Version-0.30-pink)](https://github.com/zyneonapex/jauri-webview/releases)
 
 ## jauri-webview
@@ -34,9 +34,9 @@ sudo apt-get install libgtk-4-1 libwebkitgtk-6.0-4 libjavascriptcoregtk-6.0-1
 
 ```xml
 <repository>
-    <id>nerofy-snapshots</id>
-    <name>Nerofy Network Maven repository</name>
-    <url>https://maven.nrfy.net/snapshots</url>
+    <id>zyneonapex-snapshots</id>
+    <name>Zyneon Apex Maven repository</name>
+    <url>https://maven.zyneonstudios.com/snapshots</url>
 </repository>
 
 <dependency>

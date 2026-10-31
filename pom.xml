@@ -26,17 +26,17 @@
 
   <repositories>
     <repository>
-      <id>nerofy-snapshots</id>
-      <name>Nerofy Network Maven repository</name>
-      <url>https://maven.nrfy.net/snapshots</url>
+      <id>zyneonapex-snapshots</id>
+      <name>Zyneon Apex Maven repository</name>
+      <url>https://maven.zyneonstudios.com/snapshots</url>
     </repository>
   </repositories>
 
   <distributionManagement>
     <repository>
-      <id>nerofy-snapshots</id>
-      <name>Nerofy Network Maven repository</name>
-      <url>https://maven.nrfy.net/snapshots</url>
+      <id>zyneonapex-snapshots</id>
+      <name>Zyneon Apex Maven repository</name>
+      <url>https://maven.zyneonstudios.com/snapshots</url>
     </repository>
   </distributionManagement>
 
