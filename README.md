@@ -42,7 +42,7 @@ sudo apt-get install libgtk-4-1 libwebkitgtk-6.0-4 libjavascriptcoregtk-6.0-1
 <dependency>
     <groupId>com.zyneonstudios.apex</groupId>
     <artifactId>jauri-webview</artifactId>
-    <version>0.30</version>
+    <version>0.31</version>
 </dependency>
 ```
 #### JVM flags

@@ -596,23 +596,20 @@ public final class Win32WebView extends WebviewBase {
         }
       }
       case Win32.WM_NCCALCSIZE -> {
-        if (borderless && wParam == 1L) {
-          if (outline) {
-            // Outline mode drops the title bar but keeps the side and bottom borders.
-            final var ncp = MemorySegment.ofAddress(lParam).reinterpret(48);
-            final var windowTop = ncp.get(JAVA_INT, 4); // rgrc[0].top = window top
+        if (borderless && wParam == 1) {
+          MemorySegment rect = MemorySegment.ofAddress(lParam).reinterpret(48);
+          int left = rect.get(JAVA_INT, 0);
+          int top = rect.get(JAVA_INT, 4);
+          boolean zoomed = Win32.isZoomed(hwnd);
+          if (outline || zoomed) {
             try {
-              final var _ = (long) Win32.DefWindowProcW.invokeExact(hWnd, msg, wParam, lParam);
-            } catch (final Throwable ignored) {
+              long _ = (long) Win32.DefWindowProcW.invokeExact(hwnd, msg, wParam, lParam);
+            } catch (Throwable _) {
             }
-            // Put top back so the client area reaches the top of the window with no title bar
-            // gap, leaving the computed left/right/bottom to keep the visible border pixels.
-            ncp.set(JAVA_INT, 4, windowTop);
+            int frame = rect.get(JAVA_INT, 0) - left;
+            rect.set(JAVA_INT, 4, zoomed ? top + frame : top);
           }
-          // Plain borderless swallows the whole non-client area, which loses the title bar and
-          // borders but keeps the WS_OVERLAPPEDWINDOW behaviour: taskbar button, minimize,
-          // maximize, restore, snapping and DPI handling.
-          return 0L;
+          return 0;
         }
       }
       case Win32.WM_DPICHANGED -> {
